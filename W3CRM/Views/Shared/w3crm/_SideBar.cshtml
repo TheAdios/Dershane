@@ -1,0 +1,54 @@
+﻿
+<div class="deznav">
+	<div class="deznav-scroll">
+		<ul class="metismenu" id="menu">
+			<li class="menu-title">EĞİTİM KURUMLARI</li>
+			<li>
+				<a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+					<div class="menu-icon">
+						
+					</div>
+					<span class="nav-text">Dashboard</span>
+				</a>
+				<ul aria-expanded="false">
+					<li><a href="@Url.Action("Index", "w3crm")">Dashboard Light</a></li>
+					<li><a href="@Url.Action("Index2", "w3crm")">Dashboard Dark</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="@Url.Action("ogrenciList", "Ogrenci")" class="" aria-expanded="false">
+					<div class="menu-icon">
+						<i class="fas fa-user-graduate"></i>
+					</div>
+					<span class="nav-text">Öğrenci Yönetimi</span>
+				</a>
+			</li>
+			<li>
+				<a href="@Url.Action("Index", "Home")" class="" aria-expanded="false">
+					<div class="menu-icon">
+						<i class="fas fa-user-graduate"></i>
+					</div>
+					<span class="nav-text">Ana Sayfa</span>
+				</a>
+			</li>
+			<li class="menu-item">
+				<a class="menu-link menu-toggle" href="#">
+					<i class="menu-icon ti ti-eye"></i>
+					<span class="menu-title text-truncate">Finans</span>
+				</a>
+				<ul class="menu-sub">
+					<li class="menu-item">
+						<a class="menu-link" href="@Url.Action("MuhasebeIndex", "Muhasebe")" aria-expanded="false">
+							<i class="menu-icon ti ti-eye"></i>
+							<div>Muhasebe</div>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<div class="help-desk">
+			<button id="talepAc" class="btn btn-primary">Talep Oluştur</button>
+		</div>
+	</div>
+</div>
+

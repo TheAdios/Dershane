@@ -1,0 +1,493 @@
+﻿@using Dershane.Core.Models
+@model List<Ogrenci>
+
+@{
+	ViewData["Title"] = "Öğrenci";
+}
+
+<div class="content-body">
+	<!-- row -->
+	<div class="page-titles">
+		<ol class="breadcrumb">
+			<li><h5 class="bc-title">Öğrenci</h5></li>
+			<li class="breadcrumb-item">
+				<a href="@Url.Action("Index", "w3crm")">
+					<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M2.125 6.375L8.5 1.41667L14.875 6.375V14.1667C14.875 14.5424 14.7257 14.9027 14.4601 15.1684C14.1944 15.4341 13.8341 15.5833 13.4583 15.5833H3.54167C3.16594 15.5833 2.80561 15.4341 2.53993 15.1684C2.27426 14.9027 2.125 14.5424 2.125 14.1667V6.375Z" stroke="#2C2C2C" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M6.375 15.5833V8.5H10.625V15.5833" stroke="#2C2C2C" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+					Home
+				</a>
+			</li>
+			<li class="breadcrumb-item active"><a href="javascript:void(0)">Öğrenci</a></li>
+		</ol>
+		<a class="text-primary fs-13" data-bs-toggle="offcanvas" href="#offcanvasExample1" role="button" aria-controls="offcanvasExample1">+ Add Task</a>
+	</div>
+
+    <!-- Kart -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Kart 1: Öğretmen Sayısı -->
+            <div class="col-xl-3 col-sm-6">
+                <div class="card box-hover">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box icon-box-lg bg-success-light rounded-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M160 64c0-35.3 28.7-64 64-64L576 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64l-239.2 0c-11.8-25.5-29.9-47.5-52.4-64l99.6 0 0-32c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 32 64 0 0-288L224 64l0 49.1C205.2 102.2 183.3 96 160 96l0-32zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM133.3 352l53.3 0C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7L26.7 512C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z" /></svg>
+                            </div>
+                            <div class="total-projects ms-3">
+                                <h3 class="text-success count">@ViewBag.OgretmenSayi</h3>
+                                <span>Öğretmen Sayısı</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kart 2: Öğrenci Sayısı -->
+            <div class="col-xl-3 col-sm-6">
+                <div class="card box-hover">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box icon-box-lg bg-primary-light rounded-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M219.3 .5c3.1-.6 6.3-.6 9.4 0l200 40C439.9 42.7 448 52.6 448 64s-8.1 21.3-19.3 23.5L352 102.9l0 57.1c0 70.7-57.3 128-128 128s-128-57.3-128-128l0-57.1L48 93.3l0 65.1 15.7 78.4c.9 4.7-.3 9.6-3.3 13.3s-7.6 5.9-12.4 5.9l-32 0c-4.8 0-9.3-2.1-12.4-5.9s-4.3-8.6-3.3-13.3L16 158.4l0-71.8C6.5 83.3 0 74.3 0 64C0 52.6 8.1 42.7 19.3 40.5l200-40zM111.9 327.7c10.5-3.4 21.8 .4 29.4 8.5l71 75.5c6.3 6.7 17 6.7 23.3 0l71-75.5c7.6-8.1 18.9-11.9 29.4-8.5C401 348.6 448 409.4 448 481.3c0 17-13.8 30.7-30.7 30.7L30.7 512C13.8 512 0 498.2 0 481.3c0-71.9 47-132.7 111.9-153.6z" /></svg>
+                            </div>
+                            <div class="total-projects ms-3">
+                                <h3 class="text-primary count">@ViewBag.OgrenciSayi</h3>
+                                <span>Öğrenci Sayısı</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kart 3: İptal Edilenler -->
+            <div class="col-xl-3 col-sm-6">
+                <div class="card box-hover">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box icon-box-lg bg-danger-light rounded-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                    <path d="M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9l0 28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5l0-24.6c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z" /></svg>
+                            </div>
+                            <div class="total-projects ms-3">
+                                <h3 class="text-danger count">03</h3>
+                                <span>Aktif Derslik</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kart biterrrr -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="card">
+					<div class="card-body p-0">
+						<div class="table-responsive active-projects style-1">
+							<div class="tbl-caption">
+								<h4 class="heading mb-0">Öğrenci Bilgileri</h4>
+								<div>
+									<a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#studentModal" role="button">Öğrenci Ekle</a>
+								</div>
+							</div>
+
+							<!-- Öğrenci Kayıt Modal-->
+							<div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="studentModalLabel">Öğrenci Ekle</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<form id="ogrenciForm">
+												<div class="mb-3">
+													<label for="ogrenciAdi" class="form-label">Adı</label>
+													<input type="text" class="form-control" id="ogrenciAdi" placeholder="Öğrenci Adı">
+												</div>
+												<div class="mb-3">
+													<label for="ogrenciSoyadi" class="form-label">Soyadı</label>
+													<input type="text" class="form-control" id="ogrenciSoyadi" placeholder="Öğrenci Soyadı">
+												</div>
+												<div class="mb-3">
+													<label for="ogrenciTel" class="form-label">İletişim</label>
+													<input type="tel" class="form-control" id="ogrenciTel" placeholder="Öğrenci Telefonu">
+												</div>
+												<div class="mb-3">
+													<label for="ogrenciTc" class="form-label">TC No</label>
+													<input type="text" class="form-control" id="ogrenciTc" placeholder="Öğrenci TC No">
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+													<button type="button" class="btn btn-kaydet">Kaydet</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+                            <!-- Düzenleme ve Silme işlmeleri-->
+
+                            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel">Öğrenci Düzenle</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="editForm">
+                                                <div class="mb-3">
+                                                    <label for="editOgrenciAdi" class="form-label">Adı</label>
+                                                    <input type="text" class="form-control" id="editOgrenciAdi">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editOgrenciSoyadi" class="form-label">Soyadı</label>
+                                                    <input type="text" class="form-control" id="editOgrenciSoyadi">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editOgrenciTel" class="form-label">Telefon</label>
+                                                    <input type="text" class="form-control" id="editOgrenciTel">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editOgrenciTc" class="form-label">TC</label>
+                                                    <input type="text" class="form-control" id="editOgrenciTc">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                            <button type="button" class="btn btn-primary" data-id="@ViewBag.OgrenciId" id="editSaveButton">Kaydet</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <table id="employees-tblwrapper" class="table" style="min-width: 845px;">
+                                <thead>
+                                    <tr>
+                                        <th>Öğrenci Adı</th>
+                                        <th>Öğrenci Soyadı</th>
+                                        <th>Öğrenci Tc</th>
+                                        <th>İletişim</th>
+                                        <th class="text-center d-none">İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.OgrenciAdi</td>
+                                            <td>@item.OgrenciSoyadi</td>
+                                            <td>@item.OgrenciTc</td>
+                                            <td>@item.OgrenciTel</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="#" class="btn btn-primary shadow btn-xs sharp me-2 edit-button" data-id="@item.OgrenciId">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp delete-button" data-id="@item.OgrenciId">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+        // Öğrenci Ekleme
+        $('.btn-kaydet').click(function (e) {
+            e.preventDefault();
+
+            let isValid = true;
+
+            
+            $('#ogrenciForm input').each(function () {
+                if ($(this).val().trim() === '') {
+                    isValid = false;
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Zorunlu Alanlar!',
+                        text: 'Lütfen tüm alanları doldurun.',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                    return false; 
+                }
+            });
+
+
+            
+            var ogrenciAdi = $('#ogrenciAdi').val().trim();
+            var ogrenciSoyadi = $('#ogrenciSoyadi').val().trim();
+            if ((ogrenciAdi.length < 3 || /\d/.test(ogrenciAdi)) || (ogrenciSoyadi.length < 3 || /\d/.test(ogrenciSoyadi))) {
+                isValid = false;
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Geçersiz Ad veya Soyad!',
+                    text: 'Öğrenci adı ve soyadı en az 3 karakter olmalı ve rakam içermemelidir.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                return; 
+            }
+
+           
+            var ogrenciTel = $('#ogrenciTel').val().trim();
+            if (!/^\d+$/.test(ogrenciTel)) {
+                isValid = false;
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Geçersiz Telefon Numarası!',
+                    text: 'Telefon numarası sadece rakamlardan oluşmalıdır.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                return; 
+            }
+
+
+            
+            var ogrenciTc = $('#ogrenciTc').val().trim();
+            if (ogrenciTc.length !== 11 || !/^\d+$/.test(ogrenciTc)) {
+                isValid = false;
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Geçersiz TC!',
+                    text: 'Öğrenci TC numarası 11 haneli ve sadece rakamlardan oluşmalıdır.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                return; 
+            }
+        
+
+            if (isValid) {
+              
+                var ogrenciAdi = $('#ogrenciAdi').val();
+                var ogrenciSoyadi = $('#ogrenciSoyadi').val();
+                var ogrenciTel = $('#ogrenciTel').val();
+                var ogrenciTc = $('#ogrenciTc').val();
+
+                // Kayıt ekleme  
+                $.ajax({
+                    url: '/Ogrenci/OgrenciKayit',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        OgrenciAdi: ogrenciAdi,
+                        OgrenciSoyadi: ogrenciSoyadi,
+                        OgrenciTel: ogrenciTel,
+                        OgrenciTc: ogrenciTc
+                    }),
+                    success: function (response) {
+                        if (response.basarili) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Başarılı!',
+                                text: 'Öğrenci başarıyla eklendi.',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                $('#studentModal').modal('hide');
+                                $('#ogrenciForm')[0].reset();
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Hata!',
+                                text: response.message,
+                                showConfirmButton: false
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Bir Hata Oluştu!',
+                            text: 'Lütfen tekrar deneyin.'
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+
+    // Öğrenci Düzenleme ve Silme 
+    $(document).on('click', '.edit-button', function (e) {
+        e.preventDefault();
+        
+        var ogrenciId = $(this).data('id');
+        
+        $.ajax({
+           url: '/Ogrenci/ogrenciList', 
+           data: { ogrenciId: ogrenciId }, 
+           type: 'GET',
+           success: function (response) {
+            if (response.basarili) { 
+              
+                var newObject = response.newObject;
+                
+                $('#editOgrenciAdi').val(newObject.ogrenciAdi || ''); 
+                $('#editOgrenciSoyadi').val(newObject.ogrenciSoyadi || ''); 
+                $('#editOgrenciTel').val(newObject.ogrenciTel || '');
+                $('#editOgrenciTc').val(newObject.ogrenciTc || '');
+
+                // Kaydetme butonuna tıklama 
+                $('#editSaveButton').off('click').on('click', function () {
+                    var ogrenciId = newObject.ogrenciId;
+                    var updatedData = {
+                        OgrenciAdi: $('#editOgrenciAdi').val(),
+                        OgrenciSoyadi: $('#editOgrenciSoyadi').val(),
+                        OgrenciTel: $('#editOgrenciTel').val(),
+                        OgrenciTc: $('#editOgrenciTc').val(),
+                    };
+
+                 
+                    // güncelleme
+                    $.ajax({
+                        url: '/Ogrenci/OgrenciGuncelle?ogrenciId=' + ogrenciId,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(updatedData), 
+                        success: function (response) {
+                            if (response.basarili) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Başarılı!',
+                                    text: 'Öğrenci başarıyla güncellendi.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    $('#editModal').modal('hide');
+                                    window.location.reload(); 
+                                });
+                            } else {
+                                Swal.fire({ icon: 'error', title: 'Hata!', text: response.message });
+                            }
+                        },
+                        error: function () {
+                            Swal.fire({ icon: 'error', title: 'Bir Hata Oluştu!', text: 'Lütfen tekrar deneyin.' });
+                        }
+                    });
+                });
+
+                $('#editModal').modal('show');
+            } else {
+                Swal.fire({ icon: 'error', title: 'Hata!', text: 'Öğrenci bilgisi alınamadı.' });
+            }
+        },
+        error: function () {
+            Swal.fire({ icon: 'error', title: 'Bir Hata Oluştu!', text: 'Lütfen tekrar deneyin.' });
+        }
+    });
+
+    });
+
+    $(document).on('click', '.delete-button', function (e) {
+        e.preventDefault();
+        var ogrenciId = $(this).data('id');
+
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: 'Bu işlemi geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet, sil!',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/Ogrenci/OgrenciSil?ogrenciId=' + ogrenciId,
+                    type: 'POST',
+                    success: function (response) {
+                        if (response.basarili) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Silindi!',
+                                text: 'Öğrenci başarıyla silindi.',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire({ icon: 'error', title: 'Hata!', text: response.message });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({ icon: 'error', title: 'Bir Hata Oluştu!', text: 'Lütfen tekrar deneyin.' });
+                    }
+                });
+            }
+        });
+    });
+
+
+</script>
+
+
+
+
+@section w3crm_style
+{
+	<link href="~/w3crm/vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+	<link href="~/w3crm/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+	<link href="~/w3crm/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+	<!-- tagify-css -->
+	<link href="~/w3crm/vendor/tagify/dist/tagify.css" rel="stylesheet">
+}
+
+@section w3crm_script
+{
+
+	<!-- Required vendors -->
+	<script src="~/w3crm/vendor/global/global.min.js"></script>
+	<script src="~/w3crm/vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="~/w3crm/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="~/w3crm/vendor/apexchart/apexchart.js"></script>
+
+	<!-- Dashboard 1 -->
+
+	<script src="~/w3crm/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="~/w3crm/vendor/datatables/js/dataTables.buttons.min.js"></script>
+	<script src="~/w3crm/vendor/datatables/js/buttons.html5.min.js"></script>
+	<script src="~/w3crm/vendor/datatables/js/jszip.min.js"></script>
+	<script src="~/w3crm/js/plugins-init/datatables.init.js"></script>
+
+	<!-- Apex Chart -->
+	<script src="~/w3crm/js/custom.js"></script>
+	<script src="~/w3crm/js/deznav-init.js"></script>
+
+	<!-- tagify -->
+	<script src="~/w3crm/vendor/tagify/dist/tagify.js"></script>
+}
+

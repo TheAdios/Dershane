@@ -1,0 +1,268 @@
+﻿@using Dershane.Core.Models
+@model List<DersUcret>
+
+@{
+    Layout = "~/Views/Shared/_LayoutW3CRM.cshtml";
+    ViewData["Title"] = "MuhasebeIndex";
+}
+
+
+<div class="content-body">
+    <div class="container-fluid">
+        <!-- PROFİL KARTLARI -->
+        <div class="row">
+            <div class="col-xl-4 col-lg-6 col-sm-6">
+                <div class="widget-stat card bg-primary">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3"><i class="la la-users"></i></span>
+                            <div class="media-body text-white">
+                                <p class="mb-1">Toplam Kazanç</p>
+                                <h3 class="text-white">3280</h3>
+                                <div class="progress mb-2 bg-secondary">
+                                    <div class="progress-bar progress-animated bg-white" style="width: 80%"></div>
+                                </div>
+                                <small>80% Increase in 20 Days</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-sm-6">
+                <div class="widget-stat card bg-warning">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3"><i class="la la-user"></i></span>
+                            <div class="media-body text-white">
+                                <p class="mb-1">Toplam Öğretmen</p>
+                                <h3 class="text-white">245</h3>
+                                <div class="progress mb-2 bg-primary">
+                                    <div class="progress-bar progress-animated bg-white" style="width: 50%"></div>
+                                </div>
+                                <small>50% Increase in 25 Days</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-sm-6">
+                <div class="widget-stat card bg-secondary">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3"><i class="la la-graduation-cap"></i></span>
+                            <div class="media-body text-white">
+                                <p class="mb-1">Aylık Girilen Ders Saati</p>
+                                <h3 class="text-white">28</h3>
+                                <div class="progress mb-2 bg-primary">
+                                    <div class="progress-bar progress-animated bg-white" style="width: 76%"></div>
+                                </div>
+                                <small>76% Increase in 20 Days</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEKME MENÜSÜ -->
+        @* <div class="card mt-3">
+            <div class="card-footer py-0 d-flex flex-wrap justify-content-between align-items-center px-0">
+                <ul class="nav nav-underline nav-underline-primary nav-underline-text-dark nav-underline-gap-x-0 w-100" id="tabMyProfileBottom" role="tablist">
+                    <li class="nav-item ms-1" role="presentation">
+                        <a href="#" class="nav-link py-3 border-3 text-dark active">Overview</a>
+                    </li>
+                    <li class="nav-item ms-1" role="presentation">
+                        <a href="#" class="nav-link py-3 border-3 text-dark">Projects</a>
+                    </li>
+                    <li class="nav-item ms-1" role="presentation">
+                        <a href="#" class="nav-link py-3 border-3 text-dark">Campaigns</a>
+                    </li>
+                    <li class="nav-item ms-1" role="presentation">
+                        <a href="#" class="nav-link py-3 border-3 text-dark">Documents</a>
+                    </li>
+                    <li class="nav-item ms-1" role="presentation">
+                        <a href="#" class="nav-link py-3 border-3 text-dark">Followers</a>
+                    </li>
+                    <li class="nav-item ms-1" role="presentation">
+                        <a href="#" class="nav-link py-3 border-3 text-dark">Activity</a>
+                    </li>
+                </ul>
+            </div>
+        </div> *@
+
+        <!-- TABLO ALANI -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="custom-title mb-0">Ücret Tablosu</h4>
+                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#ucretModal" role="button">Ücret Ekle</a>
+                </div>
+                <div class="table-responsive">
+                    <table id="dersProgrami" class="table table-bordered table-hover display nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>Öğretmen</th>
+                                <th>Sınıf</th>
+                                <th>Ders</th>
+                                <th>Ücret</th>
+                                <th class="text-center">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@ViewBag.Kullanici</td>
+                                    <td class="text-center">@item.Sinif.SinifSeviyesi</td>
+                                    <td class="text-center">@item.Ders.DersAdi</td>
+                                    <td class="text-center">@item.SaatlikUcret</td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#" class="btn btn-primary shadow btn-xs sharp me-2 edit-button" data-id="@item.DersUcretId">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-danger shadow btn-xs sharp delete-button" data-id="@item.DersUcretId">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/tr.min.js"></script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Buttons -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+
+@section Scripts
+{
+    <script>
+               $(function () {
+        	var table = $("#dersProgrami").DataTable({
+        		pageLength: 7,
+        		order: [],
+        		language: {
+        			paginate: {
+        				previous: "◀",
+        				next: "▶"
+        			}
+        		},
+        		buttons: [
+        			{
+        				extend: 'collection',
+        				className: 'btn btn-sm btn-label-secondary dropdown-toggle mt-3',
+        				text: 'Yazdır',
+        				buttons: [
+        					{
+        						extend: 'print',
+        						text: '<i class="ti ti-printer me-1"></i>Yazdır',
+        						className: 'dropdown-item'
+        					},
+        					{
+        						extend: 'excel',
+        						text: '<i class="ti ti-file-digit me-1"></i>Excel',
+        						className: 'dropdown-item'
+        					},
+        					{
+        						extend: 'csv',
+        						text: '<i class="ti ti-file-text me-1"></i>CSV',
+        						className: 'dropdown-item'
+        					},
+        					{
+        						extend: 'pdf',
+        						text: '<i class="ti ti-file-description me-1"></i>PDF',
+        						className: 'dropdown-item'
+        					}
+        				]
+        			}
+        		],
+        		initComplete: function () {
+        			$("#btntalepListArea").append($("#btnyenitalep"), $("#btntalepfiltre"));
+        			$("#dersProgrami_filter").css({ "text-align": "left" });
+        		}
+        	});
+        });
+            moment.locale('tr');
+        console.log(moment.locale()); // "tr" olmalı!
+    </script>
+}
+
+
+<!-- DataTable CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+
+@section w3crm_style
+{
+    <link href="~/w3crm/vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" rel="stylesheet">
+    <link href="~/w3crm/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="~/w3crm/vendor/jvmap/jquery-jvectormap.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="~/w3crm/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- tagify-css -->
+    <link href="~/w3crm/vendor/tagify/dist/tagify.css" rel="stylesheet">
+
+
+}
+
+@section w3crm_script
+{
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="~/w3crm/vendor/global/global.min.js"></script>
+    <script src="~/w3crm/vendor/chart.js/Chart.bundle.min.js"></script>
+    <script src="~/w3crm/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="~/w3crm/vendor/apexchart/apexchart.js"></script>
+
+    <!-- Dashboard 1 -->
+    <script src="~/w3crm/js/dashboard/dashboard-1.js"></script>
+    <script src="~/w3crm/vendor/draggable/draggable.js"></script>
+
+
+    <!-- tagify -->
+    <script src="~/w3crm/vendor/tagify/dist/tagify.js"></script>
+
+    <script src="~/w3crm/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/w3crm/vendor/datatables/js/dataTables.buttons.min.js"></script>
+    <script src="~/w3crm/vendor/datatables/js/buttons.html5.min.js"></script>
+    <script src="~/w3crm/vendor/datatables/js/jszip.min.js"></script>
+    <script src="~/w3crm/js/plugins-init/datatables.init.js"></script>
+
+    <!-- Apex Chart -->
+
+    <script src="~/w3crm/vendor/bootstrap-datetimepicker/js/moment.js"></script>
+    <script src="~/w3crm/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+
+    <!-- Vectormap -->
+    <script src="~/w3crm/vendor/jqvmap/js/jquery.vmap.min.js"></script>
+    <script src="~/w3crm/vendor/jqvmap/js/jquery.vmap.world.js"></script>
+    <script src="~/w3crm/vendor/jqvmap/js/jquery.vmap.usa.js"></script>
+    <script src="~/w3crm/js/custom.js"></script>
+    <script src="~/w3crm/js/deznav-init.js"></script>
+
+
+}
+

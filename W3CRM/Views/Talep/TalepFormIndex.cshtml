@@ -1,0 +1,90 @@
+﻿
+<div class="modal fade" id="talepForm" tabindex="-1" aria-labelledby="TalepFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="TalepFormModalLabel">Ders Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="TalepEkleForm" action="/Talep/TalepIndex" method="post">
+                    <input type="hidden" id="Id" name="Id" value="0">
+                    <input type="hidden" id="datetime" name="datetime" value="@DateTime.Now">
+
+                    <div class="col-md-6">
+                        <label for="AdSoyad" class="form-label">Ad Soyad</label>
+                        <input type="text" id="AdSoyad" name="AdSoyad" class="form-control">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="Konu" class="form-label">Konu</label>
+                            <input type="text" id="Konu" name="Konu" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="GirilecekDersSaati" class="form-label">Girilecek Ders Saati</label>
+                            <input type="text" id="GirilecekDersSaati" name="GirilecekDersSaati" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Açıklama" class="form-label">Açıklama</label>
+                        <textarea id="Açıklama" name="Açıklama" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+        $(document).ready(function () {
+        $("#TalepEkleForm").submit(function (e) {
+            e.preventDefault();
+
+            var Id = $("#Id").val();
+            var AdSoyad = $("#AdSoyad").val();
+            var Konu = $("#Konu").val();
+            var Açıklama = $("#Açıklama").val();
+            var datetime = $("#datetime").val();
+
+            $.ajax({
+                url: "/Talep/TalepFormIndex",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    Id: Id,
+                    AdSoyad: AdSoyad,
+                    Konu: Konu,
+                    Açıklama: Açıklama,
+                    datetime: datetime
+                }),
+                success: function (response) {
+                    if (response.basarili) {
+                        alert(response.mesaj);
+                        $("#talepForm").modal("hide");
+                        location.reload();
+                    } else {
+                        alert("İşlem başarısız: " + response.mesaj);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Hata oluştu: ", error);
+                    alert("Sunucu hatası oluştu. Lütfen tekrar deneyin.");
+                }
+            });
+        });
+    });
+
+                }
+            });
+        });
+    });
+</script>
+

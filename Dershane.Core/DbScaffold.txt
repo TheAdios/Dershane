@@ -1,0 +1,14 @@
+﻿
+LocalDb Scaffold
+
+Scaffold-DbContext -Connection "Server=.;Database=Dershane;Integrated Security=True;TrustServerCertificate=True;" -Provider Microsoft.EntityFrameworkCore.SqlServer -OutputDir "Models" -ContextDir "Context" -Context "ApplicationDbContext" -NoPluralize -UseDatabaseNames -Force
+
+
+
+
+
+AZURE DB SCAFFOLD
+
+Scaffold-DbContext -Connection "Data Source=tcp:sql-server-ftasdln.database.windows.net,1433;Initial Catalog=Dershane;Persist Security Info=True;User ID=ftasdln;Password=Ftasdelen95.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;" -Provider Microsoft.EntityFrameworkCore.SqlServer -OutputDir "Models" -ContextDir "Context" -Context "ApplicationDbContext" -NoPluralize -UseDatabaseNames -Force
+
+NOT : Db de kullancı oluşturulmalıdır . Kullanıcı adı ve şifre scaffold stringine yazılıp scaffold alınmalıdır . Herkes için scaffold cümlesi başka olacaktır . Maho sen kendıne oluşturacaksın .

@@ -1,0 +1,109 @@
+﻿
+
+<div class="modal fade" id="dersEkleModal" tabindex="-1" aria-labelledby="dersEkleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dersEkleModalLabel">Ders Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="dersEkleForm" action="/Ogrenci/DersKayit" method="post">
+                    <input type="hidden" id="ogrenciDersId" value="0">
+                    <input type="hidden" id="ogretmenId" value="@ViewBag.OgretmenId">
+
+                    <!-- Öğrenci Seçimi -->
+                    <div class="mb-3">
+                        <label for="ogrenciId" class="form-label">Öğrenci Seç</label>
+                        @Html.DropDownList("ogrenciId", (SelectList)ViewBag.OgrenciListesi, "Öğrenci Seçiniz", new { @class = "form-select" })
+                    </div>
+
+                    <!-- Başlangıç ve Bitiş Tarihi -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="baslangicTarihi" class="form-label">Başlangıç Tarihi</label>
+                            <input type="date" id="dersTarihi" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="bitisTarihi" class="form-label">Bitiş Tarihi</label>
+                            <input type="date" id="bitisTarihi" class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- Başlangıç ve Bitiş Saati -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="GirilecekDersSaati" class="form-label">Girilecek Ders Saati</label>
+                            <input type="text" id="GirilecekDersSaati" class="form-control">
+                        </div>
+                        @* <div class="col-md-6">
+                            <label for="bitisSaati" class="form-label">Bitiş Saati</label>
+                            <input type="text" id="bitisSaati" class="form-control">
+                        </div> *@
+                    </div>
+
+                    <!-- Öğretmen Notu -->
+                    <div class="mb-3">
+                        <label for="ogretmenNotu" class="form-label">Öğretmen Notu</label>
+                        <textarea id="ogretmenNotu" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        // Form gönderme işlemi
+        $("#dersEkleForm").submit(function (e) {
+            e.preventDefault(); // Sayfanın yenilenmesini engelle
+
+            // Form verilerini al
+                var ogretmenId = $("#ogretmenId").val();
+                var ogrenciDersId = $("#ogrenciDersId").val();
+                var ogrenciId = $("#ogrenciId").val();
+                var baslangicTarihi = $("#baslangicTarihi").val();
+                var bitisTarihi = $("#bitisTarihi").val();
+                var GirilecekDersSaati = $("#GirilecekDersSaati").val();
+                // var bitisSaati = $("#bitisSaati").val();
+                var ogretmenNotu = $("#ogretmenNotu").val();
+           
+                //sql 
+            // AJAX isteği
+            $.ajax({
+                url: "/Ogrenci/DersKayit", // Backend action URL'i
+                type: "POST",
+                contentType: "application/json",
+                 data: JSON.stringify({
+                        OgrenciDersId: ogrenciDersId,
+                        OgretmenId: ogretmenId,
+                        OgrenciId: ogrenciId,
+                        BaslangicTarihi: baslangicTarihi,
+                        BitisTarihi: bitisTarihi,
+                        BaslangicSaati : baslangicSaati,
+                        // BitisSaati:bitisSaati,
+                        OgretmenNotu:ogretmenNotu
+                 }),
+                success: function (response) {
+                    if (response.basarili) {
+                        alert(response.mesaj); // Başarı mesajı göster
+                        $("#dersEkleModal").modal("hide"); // Modalı kapat
+                        location.reload(); // Sayfayı yenile
+                    } else {
+                        alert("İşlem başarısız: " + response.mesaj);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Hata oluştu: ", error);
+                    alert("Sunucu hatası oluştu. Lütfen tekrar deneyin.");
+                }
+            });
+        });
+    });
+</script>
+

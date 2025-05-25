@@ -1,0 +1,218 @@
+﻿@using Dershane.Core.Models
+@model List<DersUcret>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive active-projects style-1">
+                        <div class="tbl-caption d-flex justify-content-between align-items-center">
+                            <h4 class="heading mb-0">Ücret Tablosu</h4>
+                            <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#ucretModal" role="button">Ücret Ekle</a>
+                        </div>
+
+                        <!-- Ücret Ekleme Modalı -->
+                        <div class="modal fade" id="ucretModal" tabindex="-1" aria-labelledby="ucretModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="ucretModalLabel">Ücret Ekle</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="ucretForm">
+                                            <div class="mb-3">
+                                                <label for="ogretmenAdi" class="form-label">Öğretmen Adı</label>
+                                                <input type="text" class="form-control" id="ogretmenAdi" placeholder="Öğretmen Adı">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="sinifSeviyesi" class="form-label">Sınıf</label>
+                                                <input type="text" class="form-control" id="sinifSeviyesi" placeholder="Sınıf Seviyesi">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="dersAdi" class="form-label">Ders</label>
+                                                <input type="text" class="form-control" id="dersAdi" placeholder="Ders Adı">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="ucret" class="form-label">Ücret</label>
+                                                <input type="text" class="form-control" id="ucret" placeholder="Saatlik Ücret">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                                <button type="button" class="btn btn-primary">Kaydet</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Düzenleme ve Silme Modalı -->
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel">Ücret Düzenle</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="editForm">
+                                            <div class="mb-3">
+                                                <label for="editOgretmenAdi" class="form-label">Öğretmen Adı</label>
+                                                <input type="text" class="form-control" id="editOgretmenAdi">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="editSinifSeviyesi" class="form-label">Sınıf</label>
+                                                <input type="text" class="form-control" id="editSinifSeviyesi">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="editDersAdi" class="form-label">Ders</label>
+                                                <input type="text" class="form-control" id="editDersAdi">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="editUcret" class="form-label">Ücret</label>
+                                                <input type="text" class="form-control" id="editUcret">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                        <button type="button" class="btn btn-primary" id="editSaveButton">Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ücret Tablosu -->
+                        <table id="dersProgrami" class="table" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Öğretmen</th>
+                                    <th>Sınıf</th>
+                                    <th>Ders</th>
+                                    <th>Ücret</th>
+                                    <th class="text-center">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">@item.Ogretmen.OgretmenAdi @item.Ogretmen.OgretmenSoyadi</td>
+                                        <td class="text-center">@item.Sinif.SinifSeviyesi</td>
+                                        <td class="text-center">@item.Ders.DersAdi</td>
+                                        <td class="text-center">@item.SaatlikUcret</td>
+                                        <td class="text-center">
+                                            <div class="d-flex justify-content-center">
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-2 edit-button" data-id="@item.DersUcretId">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp delete-button" data-id="@item.DersUcretId">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@* <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> *@
+
+<script>
+       $(function () {
+       	var table = $("#dersProgrami").DataTable({
+       		pageLength: 7,
+       		order: [],
+       		language: {
+       			paginate: {
+       				previous: "◀",
+       				next: "▶"
+       			}
+       		},
+       		buttons: [
+       			{
+       				extend: 'collection',
+       				className: 'btn btn-sm btn-label-secondary dropdown-toggle mt-3',
+       				text: 'Yazdır',
+       				buttons: [
+       					{
+       						extend: 'print',
+       						text: '<i class="ti ti-printer me-1"></i>Yazdır',
+       						className: 'dropdown-item'
+       					},
+       					{
+       						extend: 'excel',
+       						text: '<i class="ti ti-file-digit me-1"></i>Excel',
+       						className: 'dropdown-item'
+       					},
+       					{
+       						extend: 'csv',
+       						text: '<i class="ti ti-file-text me-1"></i>CSV',
+       						className: 'dropdown-item'
+       					},
+       					{
+       						extend: 'pdf',
+       						text: '<i class="ti ti-file-description me-1"></i>PDF',
+       						className: 'dropdown-item'
+       					}
+       				]
+       			}
+       		],
+       		initComplete: function () {
+       			$("#btntalepListArea").append($("#btnyenitalep"), $("#btntalepfiltre"));
+       			$("#dersProgrami_filter").css({ "text-align": "left" });
+       		}
+       	});
+       });
+</script>
+
+@section w3crm_style
+                               {
+    <link href="~/w3crm/vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/w3crm/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="~/w3crm/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- tagify-css -->
+    <link href="~/w3crm/vendor/tagify/dist/tagify.css" rel="stylesheet">
+}
+
+@section w3crm_script
+{
+
+    <!-- Required vendors -->
+    <script src="~/w3crm/vendor/global/global.min.js"></script>
+    <script src="~/w3crm/vendor/chart.js/Chart.bundle.min.js"></script>
+    <script src="~/w3crm/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="~/w3crm/vendor/apexchart/apexchart.js"></script>
+
+    <!-- Dashboard 1 -->
+
+    <script src="~/w3crm/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/w3crm/vendor/datatables/js/dataTables.buttons.min.js"></script>
+    <script src="~/w3crm/vendor/datatables/js/buttons.html5.min.js"></script>
+    <script src="~/w3crm/vendor/datatables/js/jszip.min.js"></script>
+    <script src="~/w3crm/js/plugins-init/datatables.init.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="~/w3crm/js/custom.js"></script>
+    <script src="~/w3crm/js/deznav-init.js"></script>
+
+    <!-- tagify -->
+    <script src="~/w3crm/vendor/tagify/dist/tagify.js"></script>
+}

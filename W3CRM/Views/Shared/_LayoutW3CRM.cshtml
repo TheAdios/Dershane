@@ -1,0 +1,57 @@
+﻿ <!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <partial name="w3crm/_Meta"/>
+    <!-- PAGE TITLE HERE -->
+    <title>Kurum Yönetim Paneli</title>
+
+    <!-- FAVICONS ICON -->
+    @* <link rel="shortcut icon" type="image/png" href="~/w3crm/images/favicon.png"> *@
+    @RenderSection("w3crm_style", false)
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <link href="~/w3crm/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="~/w3crm/css/style.css" rel="stylesheet">
+</head>
+<body data-typography="poppins" data-theme-version="light" data-layout="vertical" data-nav-headerbg="black" data-headerbg="color_1">
+    <partial name="w3crm/_PreLoader" />
+    <div id="main-wrapper">
+        <partial name="w3crm/_NavHeader" />
+        <partial name="w3crm/_ChatBox" />
+        <partial name="w3crm/_Header" />
+        <partial name="w3crm/_Sidebar" />
+        @RenderBody()  
+    </div>
+    @RenderSection("w3crm_script", false)
+    @RenderSection("Scripts", required: false)
+    <div class="modal fade" id="talepModal" tabindex="-1" aria-labelledby="talepModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="talepModalLabel">Yeni Talep</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body" id="talepFormContainer">
+                    <!-- Form burada yüklenecek -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.addEventListener("click", function (e) {
+                if (e.target && e.target.id === "talepAc") {
+                    fetch("/Talep/TalepFormIndex")
+                        .then(res => res.text())
+                        .then(html => {
+                            document.getElementById("talepFormContainer").innerHTML = html;
+                            const modal = new bootstrap.Modal(document.getElementById('talepModal'));
+                            modal.show();
+                        });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

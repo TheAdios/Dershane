@@ -1,0 +1,506 @@
+﻿@using Dershane.Core.Models
+
+@model IEnumerable<Dershane.Core.Models.OgrenciDers>
+@{
+	Layout = "~/Views/Shared/_LayoutW3CRM.cshtml";
+	ViewData["Title"] = "Index";
+}
+
+<div class="content-body" style="min-height: 824px;">
+	<div class="page-titles">
+		<ol class="breadcrumb">
+			<li><h5 class="bc-title">Dashboard</h5></li>
+			<li class="breadcrumb-item">
+				<a href="index.html">
+					<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M2.125 6.375L8.5 1.41667L14.875 6.375V14.1667C14.875 14.5424 14.7257 14.9027 14.4601 15.1684C14.1944 15.4341 13.8341 15.5833 13.4583 15.5833H3.54167C3.16594 15.5833 2.80561 15.4341 2.53993 15.1684C2.27426 14.9027 2.125 14.5424 2.125 14.1667V6.375Z" stroke="#2C2C2C" stroke-linecap="round" stroke-linejoin="round"></path>
+						<path d="M6.375 15.5833V8.5H10.625V15.5833" stroke="#2C2C2C" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					Home
+				</a>
+			</li>
+			<li class="breadcrumb-item active">
+				<a href="@Url.Action("Index", "Home")">Anasayfa</a>
+			</li>
+		</ol>
+	</div>
+
+	<div class="container-fluid">
+		<div class="card profile-overview profile-overview-wide">
+			<div class="card-body d-flex">
+				<div class="clearfix">
+					<div class="d-inline-block position-relative me-sm-4 me-3 mb-3 mb-lg-0">
+						<img src="images/avatar/pic7.jpg" alt="" class="rounded-4 profile-avatar">
+						<span class="fa fa-circle border border-3 border-white text-success position-absolute bottom-0 end-0 rounded-circle"></span>
+					</div>
+				</div>
+				<div class="clearfix d-xl-flex flex-grow-1">
+					<div class="clearfix pe-md-5">
+						<h3 class="fw-semibold mb-1">@ViewBag.KullanıcıAdSoyad</h3>
+						<ul class="d-flex flex-wrap fs-6 align-items-center">
+							<li class="me-3 d-inline-flex align-items-center"><i class="las la-user me-1 fs-18"></i>Branş :@ViewBag.BranşAdı</li>
+							<li class="me-3 d-inline-flex align-items-center"><i class="las la-envelope me-1 fs-18"></i>@ViewBag.Mail</li>
+						</ul>
+						<div class="d-md-flex d-none flex-wrap">
+							<div class="border outline-dashed rounded p-2 d-flex align-items-center me-3 mt-3">
+								<div class="avatar avatar-md bg-primary-light text-primary rounded d-flex align-items-center justify-content-center">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M12 1V23" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+										<path d="M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+								</div>
+								<div class="clearfix ms-2">
+									<h3 class="mb-0 fw-semibold lh-1">$1,250</h3>
+									<span class="fs-14">Toplam Kazanç</span>
+								</div>
+							</div>
+							<div class="border outline-dashed rounded p-2 d-flex align-items-center me-3 mt-3">
+								<div class="avatar avatar-md bg-primary-light text-primary rounded d-flex align-items-center justify-content-center">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+										<path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+										<path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+										<path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+								</div>
+								<div class="clearfix ms-2">
+									<h3 class="mb-0 fw-semibold lh-1">125</h3>
+									<span class="fs-14">Aylık Ders Saati</span>
+								</div>
+							</div>
+							<div class="border outline-dashed rounded p-2 d-flex align-items-center me-3 mt-3">
+								<div class="avatar avatar-md bg-primary-light text-primary rounded d-flex align-items-center justify-content-center">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+										<path d="M16 21V5C16 4.46957 15.7893 3.96086 15.4142 3.58579C15.0391 3.21071 14.5304 3 14 3H10C9.46957 3 8.96086 3.21071 8.58579 3.58579C8.21071 3.96086 8 4.46957 8 5V21" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+								</div>
+								<div class="clearfix ms-2">
+									<h3 class="mb-0 fw-semibold lh-1">25</h3>
+									<span class="fs-14">Branşlar</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix mt-3 mt-xl-0 ms-auto d-flex flex-column col-xl-3">
+						<div class="clearfix mb-3 text-xl-end">
+							<a href="javascript:void(0);" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#dersEkleModal">Ders Ekle</a>
+							@await Html.PartialAsync("~/Views/Ogretmen/DersKayit.cshtml")
+						</div>
+						<!-- saat tarih eklenecek  -->
+						<div class="mt-auto d-flex align-items-center" style="position: relative;">
+							<div class="clearfix me-3">
+								<p class="mb-0 d-flex">
+								</p>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- saat tarih sonu  -->
+			
+			@* <div class="card-footer py-0 d-flex flex-wrap justify-content-between align-items-center px-0">
+				<ul class="nav nav-underline nav-underline-primary nav-underline-text-dark nav-underline-gap-x-0" id="tabMyProfileBottom" role="tablist">
+					<li class="nav-item ms-1" role="presentation">
+						<a href="profile/overview.html" class="nav-link py-3 border-3 text-dark active">Overview</a>
+					</li>
+					<li class="nav-item ms-1" role="presentation">
+						<a href="profile/projects.html" class="nav-link py-3 border-3 text-dark">Projects</a>
+					</li>
+					<li class="nav-item ms-1" role="presentation">
+						<a href="profile/campaigns.html" class="nav-link py-3 border-3 text-dark">Campaigns</a>
+					</li>
+					<li class="nav-item ms-1" role="presentation">
+						<a href="profile/documents.html" class="nav-link py-3 border-3 text-dark">Documents</a>
+					</li>
+					<li class="nav-item ms-1" role="presentation">
+						<a href="profile/followers.html" class="nav-link py-3 border-3 text-dark">Followers</a>
+					</li>
+					<li class="nav-item ms-1" role="presentation">
+						<a href="profile/activity.html" class="nav-link py-3 border-3 text-dark">Activity</a>
+					</li>
+				</ul>
+				
+			</div> *@
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-8 datatable-container">
+			<div class="card">
+				<div class="card-header border-0 pb-1">
+					<h4 class="custom-title">GÜNLÜK DERS PROGRAMI <span id="selectedDateDisplay"></span></h4>
+				</div>
+				<div class="card-body">
+					<table id="dersProgrami" class="table table-bordered table-hover display nowrap" style="width:100%">
+						<thead>
+							<tr>
+								<th>Öğrenci Adı</th>
+								<th>Girilecek Ders Saati</th>
+								@* <th>Bitiş Saati</th> *@
+								<th>Seviye</th>
+								<th>Durum</th>
+								<th>Oluşturulma Tarihi</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<td class="text-center" style="vertical-align:middle;">
+										@item.Ogrenci.OgrenciAdi @item.Ogrenci.OgrenciSoyadi
+									</td>
+									<td class="text-center" data-order="@item.GirilecekDersSaati" style="vertical-align:middle;">
+										@item.GirilecekDersSaati
+									</td>
+									@* <td class="text-center" data-order="@item.BitisSaati.Ticks" style="vertical-align:middle;">
+										@item.BitisSaati
+									</td> *@
+									<td class="text-center" style="vertical-align:middle;">
+										@item.Sinif.SinifSeviyesi
+									</td>
+									<td class="text-center" style="vertical-align:middle;">
+										@(item.Aktif ? "Aktif" : "İptal")
+									</td>
+									<td class="text-center" style="vertical-align:middle;">
+										@item.OlusturmaTarihi
+									</td>
+
+								</tr>
+							}
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="up-shd">
+		<div class="card">
+			<div class="card-header border-0 pb-1">
+				<h4 class="custom-title red">DERS ÇİZELGESİ</h4>
+			</div>
+			<div class="card-body schedules-cal p-2">
+				<!-- TAKVİM SEÇİCİ -->
+				<input type="text" class="form-control d-none" id="datetimepicker1"> <!-- Input gizli -->
+
+				<div id="takvimContainer"></div> <!-- Takvim burada görünecek -->
+
+				@* <div class="events">
+					<h6>Events</h6>
+					<div class="dz-scroll event-scroll">
+						<div class="event-media">
+							<div class="d-flex align-items-center">
+								<div class="event-box">
+									<h5 class="mb-0">20</h5>
+									<span>Mon</span>
+								</div>
+								<div class="event-data ms-2">
+									<h5 class="mb-0"><a href="javascript:void(0)">Development planning</a></h5>
+									<span>w3it Technologies</span>
+								</div>
+							</div>
+							<span class="text-secondary">12:05 PM</span>
+						</div>
+					</div>
+				</div> *@
+
+				<!-- GİZLİ INPUT (Seçilen tarihi burada saklayacağız) -->
+				<input type="hidden" id="selectedDateInput">
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/tr.min.js"></script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Buttons -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+
+
+<style>
+	.custom-title {
+		font-size: 22px;
+		font-weight: bold;
+		text-transform: uppercase;
+		background: linear-gradient(90deg, rgba(0, 123, 255, 0.8), rgba(0, 86, 179, 0.8));
+		color: white;
+		padding: 10px 15px;
+		border-radius: 8px;
+		text-align: center;
+		display: inline-block;
+		letter-spacing: 1px;
+	}
+
+		.custom-title.red {
+			background: linear-gradient(90deg, rgba(220, 53, 69, 0.8), rgba(153, 27, 37, 0.8));
+		}
+
+	.datatable-container {
+		position: relative;
+		top: 0; /* Kart ile hizalamak için yukarı çek */
+		left: 0; /* Sola hizala */
+		width: 72%; /* Alanı genişlet */
+		margin-left: 25px; /* Kart ile hizalamak için biraz boşluk bırak */
+	}
+
+
+	/* Takvim Konumlandırma ve Stili */
+	.up-shd {
+		position: absolute;
+		max-width: 70%;
+		width: 350px; /* Genişliği koruyoruz */
+		top: 43%; /* Yukarı hizalama */
+		right: 19px; /* Daha sağa kaydır */
+		display: flex;
+		justify-content: flex-end;
+		min-height: 400px;
+	}
+
+	/* Takvim Kartı */
+	.card {
+		background: #fff;
+		border-radius: 5px;
+		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+		padding: 10px;
+	}
+
+	/* Takvim Başlığı */
+	.card-header h4 {
+		font-size: 1.2rem;
+		margin-bottom: 5px;
+	}
+
+	/* Etkinlik Stili */
+	.event-media {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 8px 10px;
+		border-bottom: 1px solid #ddd;
+	}
+
+		/* Etkinlik Hover */
+		.event-media:hover {
+			background: #f1f1f1;
+		}
+
+</style>
+<script>
+ //    $(function () {
+	// 	var table = $("#dersProgrami").DataTable({
+	// 		pageLength: 7,
+	// 		order: [],
+	// 		language: {
+	// 			paginate: {
+	// 				previous: "◀",
+	// 				next: "▶"      
+	// 			}
+	// 		},
+	// 		buttons: [
+	// 			{
+	// 				extend: 'collection',
+	// 				className: 'btn btn-sm btn-label-secondary dropdown-toggle mt-3',
+	// 				text: 'Yazdır',
+	// 				buttons: [
+	// 					{
+	// 						extend: 'print',
+	// 						text: '<i class="ti ti-printer me-1"></i>Yazdır',
+	// 						className: 'dropdown-item'
+	// 					},
+	// 					{
+	// 						extend: 'excel',
+	// 						text: '<i class="ti ti-file-digit me-1"></i>Excel',
+	// 						className: 'dropdown-item'
+	// 					},
+	// 					{
+	// 						extend: 'csv',
+	// 						text: '<i class="ti ti-file-text me-1"></i>CSV',
+	// 						className: 'dropdown-item'
+	// 					},
+	// 					{
+	// 						extend: 'pdf',
+	// 						text: '<i class="ti ti-file-description me-1"></i>PDF',
+	// 						className: 'dropdown-item'
+	// 					}
+	// 				]
+	// 			}
+	// 		],
+	// 		initComplete: function () {
+	// 			$("#btntalepListArea").append($("#btnyenitalep"), $("#btntalepfiltre"));
+	// 			$("#dersProgrami_filter").css({ "text-align": "left" });
+	// 		}
+	// 	});
+	// });
+		moment.locale('tr');
+	console.log(moment.locale()); // "tr" olmalı!
+
+		
+			$(document).ready(function () {
+		// 🟢 Datetimepicker başlat (Tarih seçici)
+		$('#datetimepicker1').datetimepicker({
+			format: 'YYYY-MM-DD',
+			useCurrent: false,
+			showTodayButton: true,
+		    locale: 'tr',
+			
+		});
+
+		// 🟢 Takvim görünümü oluştur
+		$('#takvimContainer').datetimepicker({
+			format: 'YYYY-MM-DD',
+			inline: true, // Takvim hep açık kalsın
+			sideBySide: false,
+			locale: 'tr',
+		});
+
+		// 🟢 DataTable'ı başlat (Başlangıçta boş olacak)
+		var table = $('#dersProgrami').DataTable({
+			pageLength: 10,
+			order: [],
+			language: {
+				paginate: {
+					previous: "◀",
+					next: "▶"
+				}
+			},
+			columns: [
+				{ data: "ogrenciAdi", title: "Öğrenci Adı" },
+				{ data: "baslangicSaati", title: "Başlama Saati" },
+				{ data: "bitisSaati", title: "Bitiş Saati" },
+				{ data: "seviye", title: "Seviye" },
+				{ data: "durum", title: "Durum" },
+				{
+					data: "olusturmaTarihi",
+					title: "Oluşturulma Tarihi",
+					defaultContent: "-" // Eğer NULL ise "-" olarak göster
+				}
+			]
+		});
+
+		// 🟢 Takvimde bir gün seçildiğinde API çağrısı yap
+		$('#takvimContainer').on("dp.change", function (e) {
+			if (e.date) {
+	            var selectedDate = e.date.format("YYYY-MM-DD"); 
+	            var GörünecekTarih = e.date.format("DD.MM.YYYY"); 
+	            $("#selectedDateDisplay").text("(" + GörünecekTarih + ")");
+					// Seçilen tarihi gizli input'a yaz
+				$("#selectedDateInput").val(selectedDate);
+				updateDataTable(selectedDate);
+			}
+		});
+
+		// 🟢 API'ye istek atıp DataTable'ı güncelleyen fonksiyon
+		function updateDataTable(selectedDate) {
+			$.ajax({
+				url: "/Takvim/GunDersList",
+				type: "GET",
+				data: { tarih: selectedDate },
+				dataType: "json",
+				success: function (response) {
+					console.log("✅ API Yanıtı:", response);
+					var table = $('#dersProgrami').DataTable();
+			          table.clear().rows.add(response).draw();
+					// Eğer gelen veri dizi değilse hata mesajı ver
+					if (!Array.isArray(response)) {
+						console.error("❌ API'den beklenen formatta veri gelmedi.");
+						alert("❌ Seçilen tarih için veri bulunamadı.");
+						return;
+					}
+
+					// 🟢 DataTable'ı temizle ve yeni veriyi ekle
+					table.clear();
+					table.rows.add(response);
+					table.draw();
+				},
+				error: function (xhr, status, error) {
+					console.error("❌ Veri yüklenirken hata oluştu:", error);
+					alert("❌ Seçilen tarih için veri bulunamadı.");
+				}
+			});
+		}
+	});
+</script>
+
+
+
+
+
+
+
+
+<!-- DataTable CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+
+@section w3crm_style
+{
+	<link href="~/w3crm/vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" rel="stylesheet">
+	<link href="~/w3crm/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="~/w3crm/vendor/jvmap/jquery-jvectormap.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+	<link href="~/w3crm/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<!-- tagify-css -->
+	<link href="~/w3crm/vendor/tagify/dist/tagify.css" rel="stylesheet">
+	
+
+}
+
+@section w3crm_script
+{
+
+	
+	<!--**********************************
+		Scripts
+	***********************************-->
+	<!-- Required vendors -->
+	<script src="~/w3crm/vendor/global/global.min.js"></script>
+	<script src="~/w3crm/vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="~/w3crm/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="~/w3crm/vendor/apexchart/apexchart.js"></script>
+
+	<!-- Dashboard 1 -->
+	<script src="~/w3crm/js/dashboard/dashboard-1.js"></script>
+	<script src="~/w3crm/vendor/draggable/draggable.js"></script>
+
+
+	<!-- tagify -->
+	<script src="~/w3crm/vendor/tagify/dist/tagify.js"></script>
+
+	<script src="~/w3crm/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="~/w3crm/vendor/datatables/js/dataTables.buttons.min.js"></script>
+	<script src="~/w3crm/vendor/datatables/js/buttons.html5.min.js"></script>
+	<script src="~/w3crm/vendor/datatables/js/jszip.min.js"></script>
+	<script src="~/w3crm/js/plugins-init/datatables.init.js"></script>
+
+	<!-- Apex Chart -->
+
+	<script src="~/w3crm/vendor/bootstrap-datetimepicker/js/moment.js"></script>
+	<script src="~/w3crm/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+
+	<!-- Vectormap -->
+	<script src="~/w3crm/vendor/jqvmap/js/jquery.vmap.min.js"></script>
+	<script src="~/w3crm/vendor/jqvmap/js/jquery.vmap.world.js"></script>
+	<script src="~/w3crm/vendor/jqvmap/js/jquery.vmap.usa.js"></script>
+	<script src="~/w3crm/js/custom.js"></script>
+	<script src="~/w3crm/js/deznav-init.js"></script>
+
+
+}
+ 
+

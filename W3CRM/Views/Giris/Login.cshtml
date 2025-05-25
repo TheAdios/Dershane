@@ -1,0 +1,163 @@
+﻿@{
+	ViewData["Title"] = "Login";
+	Layout = "~/Views/Shared/_LayoutW3CRMBlank.cshtml";
+}
+
+<div class="container-fluid h-100">
+	<div class="row h-100">
+		<div class="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
+			<div class="login-form">
+				<div class="text-center">
+					<h3 class="title">Giriş</h3>
+				</div>
+				<form id="loginForm">
+					<div class="mb-4">
+						<label class="mb-1 text-dark">Personel No</label>
+						<input type="text" id="personelNo" class="form-control" maxlength="11" placeholder="hello@example.com" required>
+					</div>
+					<div class="mb-4 position-relative">
+						<label class="mb-1 text-dark">Şifre</label>
+						<input type="password" id="parola" class="form-control" placeholder="" required>
+						<span class="show-pass eye">
+							<i class="fa fa-eye-slash"></i>
+							<i class="fa fa-eye"></i>
+						</span>
+					</div>
+					<div class="form-row d-flex justify-content-between mt-4 mb-2">
+						<div class="mb-4">
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" class="form-check-input" id="customCheckBox1">
+								<label class="form-check-label" for="customCheckBox1">Beni Hatırla</label>
+							</div>
+						</div>
+						<div class="mb-4">
+							<a href="@Url.Action("Forgotparola", "w3crm")" class="btn-link text-primary">Şifremi Unuttum</a>
+						</div>
+					</div>
+					<div class="text-center mb-4">
+						<button type="submit" class="btn btn-primary btn-block">Giriş</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-xl-6 col-lg-6">
+			<div class="pages-left h-100">
+				<div class="login-content">
+					<a href="@Url.Action("Index", "w3crm")"><img src="~/w3crm/images/logo-full.png" class="mb-3 logo-dark" alt=""></a>
+					<a href="@Url.Action("Index", "w3crm")"><img src="~/w3crm/images/logi-white.png" class="mb-3 logo-light" alt=""></a>
+					<p>Öğretmen ve Öğrenci Yönetim Paneli</p>
+				</div>
+				<div class="login-media text-center">
+					<img src="~/w3crm/images/login.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+	$("#loginForm").on("submit", function (event) {
+		event.preventDefault(); // Formun varsayılan gönderimini engelle
+
+		// Form verilerini al
+		const personelNo = $("#personelNo").val();
+		const parola = $("#parola").val();
+
+		// Kontroller
+		if (!personelNo || personelNo.length !== 11 || isNaN(personelNo)) {
+			Swal.fire({
+				icon: "error",
+				title: "Hatalı giriş",
+				text: "Lütfen 11 haneli geçerli bir Personel No giriniz.",
+				showConfirmButton: false,
+				timer: 2000
+			});
+			return;
+		}
+
+		if (!parola) {
+			Swal.fire({
+				icon: "error",
+				title: "Hatalı giriş",
+				text: "Lütfen şifrenizi giriniz.",
+				showConfirmButton: false,
+				timer: 2000
+			});
+			return;
+		}
+
+		// AJAX isteği gönder
+		$.ajax({
+			url: "/Giris/Login?personelNo=" + encodeURIComponent(personelNo) + "&parola=" + encodeURIComponent(parola),
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify({
+				personelNo: personelNo,
+				parola: parola
+			}),
+			
+			success: function (response) {
+				
+				// Başarılı giriş
+				if (response.success) { 
+					               // API'den gelen başarı yanıtı
+					Swal.fire({
+						icon: "success",
+						title: "Giriş başarılı",
+						text: "Yönlendiriliyor...",
+						showConfirmButton: false,
+						timer: 2000, // Mesaj 2 saniye görünecek
+						  }).then(() => {
+				// Backend'den gelen redirect URL'si ile yönlendirme
+				window.location.href = response.redirectUrl;
+			});
+				} else {
+					// API'den gelen başarısız yanıt
+					Swal.fire({
+						icon: "error",
+						title: "Hatalı giriş",
+						text: response.message,
+						showConfirmButton: false,
+						timer: 2000
+					});
+				}
+			},
+			error: function (xhr) {
+				// Hata durumu
+				Swal.fire({
+					icon: "error",
+					title: "Hatalı giriş",
+					text: "Kullanıcı adı veya şifre yanlış.",
+					showConfirmButton: false,
+					timer: 2000
+				});
+			}
+		});
+	});
+</script>
+
+
+<!--**********************************
+	Content body end
+***********************************-->
+@section w3crm_style
+{
+
+}
+
+@section w3crm_script
+{
+		<!--**********************************
+			Scripts
+		***********************************-->
+		<!-- Required vendors -->
+		<script src="~/w3crm/vendor/global/global.min.js"></script>
+		<script src="~/w3crm/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+		<script src="~/w3crm/js/deznav-init.js"></script>
+
+		<script src="~/w3crm/js/custom.js"></script>
+
+}
